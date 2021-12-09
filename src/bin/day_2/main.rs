@@ -12,7 +12,7 @@ fn main() {
 	let mut depth: u32 = 0;
 
 	// Execute all commands
-	for (command, unit) in commands {
+	for (command, unit) in &commands {
 		match command {
 			Command::Forward => {
 				horizontal_position += unit;
@@ -22,6 +22,32 @@ fn main() {
 			},
 			Command::Up => {
 				depth -= unit;
+			}
+		}
+	}
+
+	println!("Depth: {}", depth);
+	println!("Horizontal position: {}", horizontal_position);
+	println!("Final product: {}", depth * horizontal_position);
+
+
+	// --- Part Two ---
+	// Execute new interpretation of commands
+	let mut aim: u32 = 0;
+	horizontal_position = 0;
+	depth = 0;
+
+	for (command, unit) in &commands {
+		match command {
+			Command::Forward => {
+				horizontal_position += unit;
+				depth += aim * unit;
+			},
+			Command::Down => {
+				aim += unit;
+			},
+			Command::Up => {
+				aim -= unit;
 			}
 		}
 	}
