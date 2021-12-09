@@ -35,6 +35,7 @@ fn main() {
 	number_of_increases = 0;
 	let mut previous_window_sum: Option<u32> = None;
 
+	// Count number of measurements increases using windows of size 3
 	for i in 0..(depths.len() - 2) {
 		let window_sum = depths[i] + depths[i+1] + depths[i+2];
 
