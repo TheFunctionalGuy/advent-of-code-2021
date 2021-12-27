@@ -33,10 +33,10 @@ fn main() {
 		}
 
 		if ones > zeros {
-			result_bits = result_bits | mask;
+			result_bits |= mask;
 		}
 
-		mask = mask << 1;
+		mask <<= 1;
 	}
 
 	// Gamma rate are most common bits
@@ -54,7 +54,7 @@ fn main() {
 	println!("\n--- Part Two ---");
 	mask = 0b100000000000;
 	let mut oxygen_generator_candidates: Vec<u32> = binary_numbers.clone();
-	let mut co2_scrubber_rating_candidates: Vec<u32> = binary_numbers.clone();
+	let mut co2_scrubber_rating_candidates: Vec<u32> = binary_numbers;
 
 	for _ in 0..num_bits {
 		let mut ones: Vec<u32> = Vec::new();
@@ -78,7 +78,7 @@ fn main() {
 			break;
 		}
 
-		mask = mask >> 1;
+		mask >>= 1;
 	}
 
 	mask = 0b100000000000;
@@ -104,7 +104,7 @@ fn main() {
 			break;
 		}
 
-		mask = mask >> 1;
+		mask >>= 1;
 	}
 
 	println!("Final oxygen generator rating: {}", oxygen_generator_candidates[0]);
