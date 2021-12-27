@@ -64,7 +64,7 @@ enum Command {
 }
 
 // Parse commands by unpacking strings to tuples of command and unit
-fn parse_commands(unparsed_commands: &Vec<String>) -> Vec<(Command, u32)> {
+fn parse_commands(unparsed_commands: &[String]) -> Vec<(Command, u32)> {
 	let parsed_commands = unparsed_commands.iter()
 		.filter_map(|command_string| fetch_command(command_string))
 		.collect();
@@ -73,8 +73,8 @@ fn parse_commands(unparsed_commands: &Vec<String>) -> Vec<(Command, u32)> {
 }
 
 // Fetch a single command by splitting string into tuple of command and unit
-fn fetch_command(command_string: &String) -> Option<(Command, u32)> {
-	let splits: Vec<_> = command_string.split(" ").collect();
+fn fetch_command(command_string: &str) -> Option<(Command, u32)> {
+	let splits: Vec<_> = command_string.split(' ').collect();
 
 	let command: Option<Command> = match splits[0] {
 		"forward" => Some(Command::Forward),
@@ -85,8 +85,5 @@ fn fetch_command(command_string: &String) -> Option<(Command, u32)> {
 
 	let unit: u32 = splits[1].parse().unwrap();
 
-	match command {
-		Some(c) => Some((c, unit)),
-		None => None
-	}
+	command.map(|c| (c, unit))
 }
