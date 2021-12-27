@@ -5,7 +5,7 @@ use helper::lines_from_file;
 fn main() {
 	// --- Part One ---
 	println!("--- Part One ---");
-	// Read file and convert to vector u32 value
+	// Read file and convert to vector of String tuples
 	let unparsed_input = lines_from_file("src/bin/day_8/day_8.txt");
 	let signals: Vec<(Vec<String>, Vec<String>)> = unparsed_input.iter()
 		.filter_map(|l| match l.split(" | ").collect::<Vec<_>>().as_slice() {
