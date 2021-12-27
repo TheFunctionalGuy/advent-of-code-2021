@@ -18,7 +18,7 @@ fn main() {
 	assert!(unparsed_boards.len() % BOARD_SIZE == 0);
 
 	// Extract numbers to pull
-	let numbers: Vec<u32> = unparsed_numbers.split(",")
+	let numbers: Vec<u32> = unparsed_numbers.split(',')
 		.filter_map(|n| n.parse().ok())
 		.collect();
 
@@ -62,10 +62,8 @@ fn main() {
 
 		// Mark winners
 		for (index, board) in boards.iter().enumerate() {
-			if has_won(board) {
-				if !winners_index.contains(&index) {
-					winners_index.push(index);
-				}
+			if has_won(board) && !winners_index.contains(&index) {
+				winners_index.push(index);
 			}
 		}
 
@@ -134,7 +132,7 @@ fn create_board(board_string: &[&String], size: usize) -> BingoBoard {
 	assert_eq!(BOARD_SIZE, board_string.len());
 
 	let state: Vec<Vec<BingoEntry>> = board_string.iter()
-		.map(|l| l.split(" ")
+		.map(|l| l.split(' ')
 			.filter_map(|n| match n.parse() {
 				Ok(n) => Some(BingoEntry::Entry(n)),
 				Err(_) => None,
@@ -151,7 +149,7 @@ fn create_board(board_string: &[&String], size: usize) -> BingoBoard {
 fn mark_number(board: &mut BingoBoard, number: &u32) -> BingoBoard {
 	BingoBoard {
 		state: board.state.iter_mut()
-			.map(|l| l.into_iter()
+			.map(|l| l.iter_mut()
 				.map(|e| match e {
 					BingoEntry::Entry(n) => {
 						if n == number {
@@ -184,9 +182,5 @@ fn has_won(board: &BingoBoard) -> bool {
 	}
 
 	// When any row is still marked it only contains Hit entries
-	if rows.iter().any(|&v| v) || columns.iter().any(|&v| v) {
-		true
-	} else {
-		false
-	}
+	rows.iter().any(|&v| v) || columns.iter().any(|&v| v)
 }
