@@ -1,6 +1,6 @@
-use std::{str::FromStr, num::ParseIntError};
+use std::str::FromStr;
 
-use helper::lines_from_file;
+use helper::{lines_from_file, Point};
 
 fn main() {
 	// --- Part One ---
@@ -10,7 +10,11 @@ fn main() {
 	let parsed_points: Vec<(Point, Point)> = unparsed_input.iter()
 		.filter_map(|s| {
 			let points: Vec<_> = s.split(" -> ").collect();
-			Some((Point::from_str(points[0]).unwrap(), Point::from_str(points[1]).unwrap()))
+
+			match (Point::from_str(points[0]).ok(), Point::from_str(points[1]).ok()) {
+				(Some(p_1), Some(p_2)) => Some((p_1, p_2)),
+				_ => None
+			}
 		})
 		.collect();
 
@@ -63,8 +67,8 @@ fn main() {
 		} else {
 			// Diagonal case for part two
 			let (from, to) = if from.x < to.x { (from, to) } else { (to, from) };
-			let x_up = if from.x < to.x { true } else { false };
-			let y_up = if from.y < to.y { true } else { false };
+			let x_up = from.x < to.x;
+			let y_up = from.y < to.y;
 
 			let (mut x, mut y) = (from.x, from.y);
 
@@ -87,6 +91,7 @@ fn main() {
 
 	println!("Number of overlaps: {}", num_overlaps);
 
+
 	// --- Part Two ---
 	println!("\n--- Part Two ---");
 	// Calculate number of overlaps for diagonal case
@@ -97,23 +102,4 @@ fn main() {
 		.sum();
 
 	println!("Number of overlaps respecting diagonal lines: {}", num_diag_overlaps);
-}
-
-#[derive(Debug)]
-struct Point {
-	x: usize,
-	y: usize,
-}
-
-// Implementation to create Point form str
-impl FromStr for Point {
-	type Err = ParseIntError;
-	fn from_str(s: &str) -> Result<Self, Self::Err> {
-		let coords: Vec<_> = s.split(",").collect();
-
-		let x = coords[0].parse()?;
-		let y = coords[1].parse()?;
-
-		Ok(Point { x, y })
-	}
 }
