@@ -14,6 +14,7 @@ pub fn lines_from_file(filename: impl AsRef<Path>) -> Vec<String> {
         .collect()
 }
 
+#[derive(Clone, Copy, PartialEq, Eq)]
 pub struct Point {
 	pub x: usize,
 	pub y: usize,
