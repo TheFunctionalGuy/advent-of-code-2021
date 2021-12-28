@@ -5,7 +5,7 @@ fn main () {
 	println!("--- Part One ---");
 	// Read file and convert to vector u32 value
 	let unparsed_input = lines_from_file("src/bin/day_6/day_6.txt");
-	let initial_state: Vec<u32> = unparsed_input[0].split(",")
+	let initial_state: Vec<u32> = unparsed_input[0].split(',')
 		.filter_map(|n| n.parse().ok())
 		.collect();
 
@@ -19,19 +19,19 @@ fn main () {
 		let mut new_fish: Vec<u32> = Vec::new();
 
 		// Update every fish
-		for i in 0..current_fish_timers.len() {
-			if current_fish_timers[i] == 0 {
-				current_fish_timers[i] = 6;
+		for timer in &mut current_fish_timers {
+			if *timer == 0 {
+				*timer = 6;
 				// Create new fish with timer of 8
 				new_fish.push(8);
 			} else {
-				current_fish_timers[i] -= 1;
+				*timer -= 1;
 			}
 		}
 
 		// Add new fishes to group
 		current_fish_timers.append(&mut new_fish);
-		println!("Number of fishes after {:2} day(s): {}", day, current_fish_timers.iter().count());
+		println!("Number of fishes after {:2} day(s): {}", day, current_fish_timers.len());
 	}
 
 
@@ -47,12 +47,12 @@ fn main () {
 	// Simulate fish population for 256 days
 	for day in 0..256 {
 		let new_fish = current_fish_timers[0];
-		
+
 		// Update every fish bin
 		for i in 0..8 {
 			current_fish_timers[i] = current_fish_timers[i + 1];
 		}
-		
+
 		// Add new fishes to group of 6 and 8
 		current_fish_timers[6] += new_fish;
 		current_fish_timers[8] = new_fish;
