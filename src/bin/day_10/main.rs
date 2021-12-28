@@ -50,42 +50,40 @@ fn main() {
 	assert!(autocomplete_scores.len() % 2 == 1);
 
 	// Sort score
-	autocomplete_scores.sort();
+	autocomplete_scores.sort_unstable();
 
 	// Calculate index
 	let index: usize = autocomplete_scores.len() / 2;
 	println!("Middle autocomplete score: {}", autocomplete_scores[index]);
 }
 
-fn check_syntax(line: &Vec<char>) -> Option<u32> {
+fn check_syntax(line: &[char]) -> Option<u32> {
 	let mut bracket_stack: Vec<char> = Vec::new();
 
 	for bracket in line {
 		if ['(', '[', '{', '<'].contains(bracket) {
 			bracket_stack.push(*bracket);
-		} else {
-			if let Some(pairing_bracket) = bracket_stack.pop() {
-				match (pairing_bracket, bracket) {
-					// Check for matching brackets
-					('(', ')') => {},
-					('[', ']') => {},
-					('{', '}') => {},
-					('<', '>') => {},
-					// Check for non-matching brackets
-					(_, ')') => {
-						return Some(3);
-					},
-					(_, ']') => {
-						return Some(57);
-					},
-					(_, '}') => {
-						return Some(1197);
-					},
-					(_, '>') => {
-						return Some(25137);
-					},
-					_ => {}
-				}
+		} else if let Some(pairing_bracket) = bracket_stack.pop() {
+			match (pairing_bracket, bracket) {
+				// Check for matching brackets
+				('(', ')') => {},
+				('[', ']') => {},
+				('{', '}') => {},
+				('<', '>') => {},
+				// Check for non-matching brackets
+				(_, ')') => {
+					return Some(3);
+				},
+				(_, ']') => {
+					return Some(57);
+				},
+				(_, '}') => {
+					return Some(1197);
+				},
+				(_, '>') => {
+					return Some(25137);
+				},
+				_ => {}
 			}
 		}
 	}
@@ -93,7 +91,7 @@ fn check_syntax(line: &Vec<char>) -> Option<u32> {
 	None
 }
 
-fn complete_line(line: &Vec<char>) -> Vec<char> {
+fn complete_line(line: &[char]) -> Vec<char> {
 	let mut bracket_stack: Vec<char> = Vec::new();
 	let mut missing_brackets: Vec<char> = Vec::new();
 
