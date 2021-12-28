@@ -11,18 +11,18 @@ fn main() {
 		.filter_map(|l| match l.split(" | ").collect::<Vec<_>>().as_slice() {
 			[left, right] => {
 				Some((
-					left.split(" ")
+					left.split(' ')
 						// Normalize left string by sorting its characters
 						.map(|s| {
 							let mut chars = s.chars().collect::<Vec<char>>();
-							chars.sort();
+							chars.sort_unstable();
 							String::from_iter(chars)
 						}).collect(),
-					right.split(" ")
+					right.split(' ')
 						// Normalize right string by sorting its charactersq
 						.map(|s| {
 							let mut chars = s.chars().collect::<Vec<char>>();
-							chars.sort();
+							chars.sort_unstable();
 							String::from_iter(chars)
 						})
 						.collect(),
@@ -59,13 +59,13 @@ fn main() {
 }
 
 // Easy digits use either 2 (=1), 3 (=7), 4 (=4) or 7 (=8) segments
-fn is_easy_pattern(signal: &String) -> bool {
+fn is_easy_pattern(signal: &str) -> bool {
 	let easy_segment_counts = [2, 3, 4, 7];
 
 	easy_segment_counts.contains(&signal.len())
 }
 
-fn find_mapping(patterns: &Vec<String>) -> HashMap<&String, u32> {
+fn find_mapping(patterns: &[String]) -> HashMap<&String, u32> {
 	// HashMap for the deduced mappings
 	let mut mapping: HashMap<&String, u32> = HashMap::new();
 	// HashMap from String to containing chars
@@ -127,19 +127,17 @@ fn find_mapping(patterns: &Vec<String>) -> HashMap<&String, u32> {
 	for candidate in str_len_6 {
 		if set_mappings[candidate].intersection(&one_set).collect::<HashSet<_>>().len() == 1 {
 			mapping.insert(candidate, 6);
+		} else if set_mappings[candidate].intersection(&four_set).collect::<HashSet<_>>().len() == 3 {
+			mapping.insert(candidate, 0);
 		} else {
-			if set_mappings[candidate].intersection(&four_set).collect::<HashSet<_>>().len() == 3 {
-				mapping.insert(candidate, 0);
-			} else {
-				mapping.insert(candidate, 9);
-			}
+			mapping.insert(candidate, 9);
 		}
 	}
 
 	mapping
 }
 
-fn apply_mapping(patterns: &Vec<String>, mapping: HashMap<&String, u32>) -> Vec<u32> {
+fn apply_mapping(patterns: &[String], mapping: HashMap<&String, u32>) -> Vec<u32> {
 	patterns.iter()
 		.map(|p| mapping[p])
 		.collect()
