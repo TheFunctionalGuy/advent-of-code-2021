@@ -25,7 +25,7 @@ fn main() {
 	// Run 100 iterations and count flashes
 	let mut flash_count: u32 = 0;
 
-	for iteration in 0..100 {
+	for iteration in 0.. {
 		println!("Iteration {:3}", iteration + 1);
 		// 1. Step: Increase energy level
 		for line in &mut octopus_grid {
@@ -64,6 +64,15 @@ fn main() {
 			octopus_grid[point.y][point.x].has_flashed = true;
 		}
 
+		// --- Part Two ---
+		if octopus_grid.iter()
+			.flatten()
+			.all(|o| o.has_flashed) {
+			println!("\n--- Part Two ---");
+			println!("First iteration all octopuses flash: {}", iteration + 1);
+			break;
+		}
+
 		// 3. Step: Reset energy level of flashed octopus
 		for line in &mut octopus_grid {
 			for octopus in line {
@@ -74,9 +83,11 @@ fn main() {
 				}
 			}
 		}
-	}
 
-	println!("Total number of flashes: {}", flash_count);
+		if iteration == 99 {
+			println!("Total number of flashes after {} iterations: {}", iteration + 1, flash_count);
+		}
+	}
 }
 
 struct Octopus {
