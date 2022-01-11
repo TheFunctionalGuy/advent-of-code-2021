@@ -5,6 +5,8 @@ use std::num::ParseIntError;
 use std::path::Path;
 use std::str::FromStr;
 
+
+// === Loose helper functions ===
 pub fn lines_from_file(filename: impl AsRef<Path>) -> Vec<String> {
     let file = File::open(filename).expect("No such file found.");
     let buffered_reader = BufReader::new(file);
@@ -14,6 +16,8 @@ pub fn lines_from_file(filename: impl AsRef<Path>) -> Vec<String> {
         .collect()
 }
 
+
+// === Data structures ===
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub struct Point {
 	pub x: usize,

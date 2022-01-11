@@ -37,6 +37,7 @@ fn main() {
 		let mut to_flash: Vec<Point> = Vec::new();
 
 		// 2. Step: Flash and propagate flashes
+		#[allow(clippy::needless_range_loop)]
 		for y in 0..height {
 			for x in 0..width {
 				if octopus_grid[y][x].energy_level > 9 {
