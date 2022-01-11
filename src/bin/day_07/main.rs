@@ -6,7 +6,7 @@ fn main() {
 	// --- Part One ---
 	println!("--- Part One ---");
 	// Read file and convert to vector u32 value
-	let unparsed_input = lines_from_file("src/bin/day_7/day_7.txt");
+	let unparsed_input = lines_from_file("src/bin/day_07/day_07.txt");
 	let horizontal_positions: Vec<u32> = unparsed_input[0].split(',')
 		.filter_map(|n| n.parse().ok())
 		.collect();

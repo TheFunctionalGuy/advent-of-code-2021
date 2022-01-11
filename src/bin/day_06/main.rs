@@ -4,7 +4,7 @@ fn main () {
 	// --- Part One ---
 	println!("--- Part One ---");
 	// Read file and convert to vector u32 value
-	let unparsed_input = lines_from_file("src/bin/day_6/day_6.txt");
+	let unparsed_input = lines_from_file("src/bin/day_06/day_06.txt");
 	let initial_state: Vec<u32> = unparsed_input[0].split(',')
 		.filter_map(|n| n.parse().ok())
 		.collect();

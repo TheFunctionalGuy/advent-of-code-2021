@@ -8,7 +8,7 @@ fn main() {
 	// --- Part One ---
 	println!("--- Part One ---");
 	// Read file and convert to u32 vector and 2d-vector for boards
-	let unparsed_input = lines_from_file("src/bin/day_4/day_4.txt");
+	let unparsed_input = lines_from_file("src/bin/day_04/day_04.txt");
 	let unparsed_numbers = &unparsed_input[0];
 	let unparsed_boards: Vec<&String> = unparsed_input[2..].iter()
 		.filter(|s| !s.is_empty())

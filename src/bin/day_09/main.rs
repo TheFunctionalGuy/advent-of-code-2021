@@ -3,8 +3,8 @@ use helper::lines_from_file;
 fn main() {
 	// --- Part One ---
 	println!("--- Part One ---");
-	// Read file and convert to vector u32 value
-	let unparsed_input = lines_from_file("src/bin/day_9/day_9.txt");
+	// Read file and convert to vector of vectors of u32 values
+	let unparsed_input = lines_from_file("src/bin/day_09/day_09.txt");
 
 	let height_map: Vec<Vec<u32>> = unparsed_input.iter()
 		.map(|l| l.chars()

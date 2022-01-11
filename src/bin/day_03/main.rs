@@ -4,7 +4,7 @@ fn main() {
 	// --- Part One ---
 	println!("--- Part One ---");
 	// Read file and convert to u32 vector
-	let unparsed_input = lines_from_file("src/bin/day_3/day_3.txt");
+	let unparsed_input = lines_from_file("src/bin/day_03/day_03.txt");
 	let binary_numbers: Vec<u32> = unparsed_input.iter()
 		.filter_map(|line| u32::from_str_radix(line, 2).ok())
 		.collect();

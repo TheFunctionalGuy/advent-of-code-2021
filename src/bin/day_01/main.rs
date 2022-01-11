@@ -3,7 +3,7 @@ use helper::lines_from_file;
 fn main() {
 	// --- Part One ---
 	// Read file and convert to u32 vector
-	let unparsed_input = lines_from_file("src/bin/day_1/day_1.txt");
+	let unparsed_input = lines_from_file("src/bin/day_01/day_01.txt");
 	let depths: Vec<u32> = unparsed_input.iter()
 		.filter_map(|line| line.parse::<u32>().ok())
 		.collect();

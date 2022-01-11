@@ -6,7 +6,7 @@ fn main() {
 	// --- Part One ---
 	println!("--- Part One ---");
 	// Read file and convert to vector of tuple of points
-	let unparsed_input = lines_from_file("src/bin/day_5/day_5.txt");
+	let unparsed_input = lines_from_file("src/bin/day_05/day_05.txt");
 	let parsed_points: Vec<(Point, Point)> = unparsed_input.iter()
 		.filter_map(|s| {
 			let points: Vec<_> = s.split(" -> ").collect();

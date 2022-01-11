@@ -3,7 +3,7 @@ use helper::lines_from_file;
 fn main() {
 	// --- Part One ---
 	// Read file and parse commands to tuples
-	let unparsed_input = lines_from_file("src/bin/day_2/day_2.txt");
+	let unparsed_input = lines_from_file("src/bin/day_02/day_02.txt");
 	let commands = parse_commands(&unparsed_input);
 
 	assert_eq!(commands.len(), 1000);
